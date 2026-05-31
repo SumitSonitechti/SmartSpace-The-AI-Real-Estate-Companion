@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SmartSpace — Developer Blueprint</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#0c0c0c;--ink2:#3a3a3a;--ink3:#767676;
+  --bg:#f8f6f0;--bg2:#ffffff;--bg3:#f0ede4;
+  --accent:#1a6b4a;--accent2:#e8f4ee;
+  --gold:#c8832a;--gold2:#fdf3e3;
+  --coral:#c84b2a;--coral2:#fdf0eb;
+  --blue:#1a4b8a;--blue2:#e8f0fd;
+  --border:rgba(12,12,12,0.1);
+  --r:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;background:var(--bg);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:58px;
+}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--accent);letter-spacing:-0.02em}
+.nav-links{display:flex;gap:6px}
+.nav-link{
+  font-size:0.78rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;
+  padding:6px 14px;border-radius:20px;border:none;background:transparent;
+  color:var(--ink2);cursor:pointer;transition:all 0.2s;text-decoration:none
+}
+.nav-link:hover,.nav-link.active{background:var(--accent);color:#fff}
+
+/* HERO */
+.hero{
+  background:var(--ink);color:#fff;
+  padding:80px 48px 64px;
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+}
+.hero-tag{
+  display:inline-block;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+  text-transform:uppercase;background:var(--accent);color:#fff;
+  padding:4px 12px;border-radius:20px;margin-bottom:20px
+}
+.hero h1{
+  font-family:'DM Serif Display',serif;font-size:3.2rem;line-height:1.15;
+  letter-spacing:-0.03em;margin-bottom:20px;
+}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,0.7);line-height:1.75;max-width:480px}
+.hero-stack{display:flex;flex-direction:column;gap:14px}
+.stack-item{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+  border-radius:var(--r);padding:16px 20px;
+  display:flex;align-items:flex-start;gap:14px;
+}
+.stack-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.stack-item h4{font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:4px}
+.stack-item p{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.5}
+
+/* SECTIONS */
+.section{padding:64px 48px;border-bottom:1px solid var(--border)}
+.section-tag{font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.section h2{font-family:'DM Serif Display',serif;font-size:2rem;letter-spacing:-0.02em;margin-bottom:8px}
+.section-sub{font-size:1rem;color:var(--ink2);margin-bottom:40px;max-width:640px}
+
+/* PAGES GRID */
+.pages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.page-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;transition:all 0.2s;cursor:default;
+}
+.page-card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(26,107,74,0.1)}
+.page-num{font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.page-card h3{font-size:1.05rem;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.page-card p{font-size:0.82rem;color:var(--ink2);line-height:1.6;margin-bottom:14px}
+.feature-tags{display:flex;flex-wrap:wrap;gap:6px}
+.ftag{
+  font-size:0.7rem;font-weight:500;padding:3px 9px;border-radius:12px;
+  background:var(--bg3);color:var(--ink2);border:1px solid var(--border)
+}
+.ftag.ai{background:var(--accent2);color:var(--accent);border-color:rgba(26,107,74,0.2)}
+.ftag.map{background:var(--blue2);color:var(--blue);border-color:rgba(26,75,138,0.2)}
+.ftag.data{background:var(--gold2);color:var(--gold);border-color:rgba(200,131,42,0.2)}
+.ftag.live{background:var(--coral2);color:var(--coral);border-color:rgba(200,75,42,0.2)}
+
+/* FEATURES TABLE */
+.features-table{width:100%;border-collapse:collapse}
+.features-table th{
+  text-align:left;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--ink3);padding:10px 16px;
+  border-bottom:2px solid var(--border);background:var(--bg3)
+}
+.features-table td{
+  padding:14px 16px;border-bottom:1px solid var(--border);
+  font-size:0.85rem;vertical-align:top
+}
+.features-table tr:hover td{background:var(--bg3)}
+.priority{
+  display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.05em;
+  text-transform:uppercase;padding:2px 8px;border-radius:10px
+}
+.p-must{background:#e8f4ee;color:var(--accent)}
+.p-should{background:var(--gold2);color:var(--gold)}
+.p-could{background:var(--bg3);color:var(--ink3)}
+.agent-badge{
+  display:inline-block;font-size:0.7rem;font-weight:500;
+  padding:2px 8px;border-radius:10px;
+  background:rgba(26,107,74,0.1);color:var(--accent);margin-right:4px;margin-bottom:4px
+}
+
+/* TECH STACK */
+.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tech-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
+  padding:20px;
+}
+.tech-card h4{font-size:0.88rem;font-weight:600;margin-bottom:6px}
+.tech-card p{font-size:0.78rem;color:var(--ink2);line-height:1.55}
+.tech-tag{display:inline-block;font-size:0.68rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:3px 8px;border-radius:8px;margin-bottom:10px}
+
+/* SPRINT TIMELINE */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--border)}
+.sprint{position:relative;margin-bottom:28px}
+.sprint::before{
+  content:'';position:absolute;left:-24px;top:6px;
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  border:2px solid var(--bg)
+}
+.sprint-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sprint-num{font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3)}
+.sprint h4{font-size:0.92rem;font-weight:600}
+.sprint-tasks{display:flex;flex-wrap:wrap;gap:6px}
+.task{
+  font-size:0.75rem;background:var(--bg2);
+  border:1px solid var(--border);border-radius:8px;padding:4px 10px
+}
+
+/* AGENTIC WORKFLOW */
+.workflow{display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:8px}
+.wf-step{
+  flex-shrink:0;background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r);padding:16px 18px;min-width:140px;text-align:center
+}
+.wf-arrow{
+  flex-shrink:0;font-size:1.2rem;color:var(--accent);
+  margin:0 6px;font-weight:600
+}
+.wf-step h5{font-size:0.82rem;font-weight:600;margin-bottom:4px}
+.wf-step p{font-size:0.72rem;color:var(--ink3);line-height:1.45}
+.wf-step.highlight{background:var(--accent);border-color:var(--accent);color:#fff}
+.wf-step.highlight h5,.wf-step.highlight p{color:#fff}
+
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:28px;background:var(--bg3);padding:5px;border-radius:12px;width:fit-content}
+.tab-btn{
+  padding:7px 18px;border-radius:9px;border:none;background:transparent;
+  font-size:0.82rem;font-weight:500;color:var(--ink2);cursor:pointer;transition:all 0.18s
+}
+.tab-btn.active{background:var(--bg2);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* MULTIMODAL */
+.mm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.mm-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;
+}
+.mm-icon{font-size:1.8rem;margin-bottom:12px}
+.mm-card h4{font-size:0.92rem;font-weight:600;margin-bottom:8px}
+.mm-card p{font-size:0.82rem;color:var(--ink2);line-height:1.6}
+.mm-flow{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.mm-node{
+  font-size:0.72rem;padding:3px 10px;border-radius:10px;
+  background:var(--bg3);border:1px solid var(--border)
+}
+.mm-arrow{color:var(--ink3);font-size:0.9rem}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:32px 48px;font-size:0.8rem;display:flex;justify-content:space-between;align-items:center}
+footer strong{color:#fff}
+
+/* UTILS */
+.badge{display:inline-block;font-size:0.7rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:3px 9px;border-radius:10px}
+.divider{height:1px;background:var(--border);margin:28px 0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SmartSpace</div>
+  <div class="nav-links">
+    <a class="nav-link active" href="#pages">Pages</a>
+    <a class="nav-link" href="#features">Features</a>
+    <a class="nav-link" href="#agents">Agents</a>
+    <a class="nav-link" href="#tech">Tech stack</a>
+    <a class="nav-link" href="#sprints">Sprints</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-tag">Google Cloud · Vertex AI · Gemma · Agentic</div>
+    <h1>SmartSpace<br/><em>Developer</em><br/>Blueprint</h1>
+    <p>A professional reference for building the unified AI real estate companion — architected for Google Cloud, built on agentic workflows, powered by Gemma and Vertex AI.</p>
+  </div>
+  <div class="hero-stack">
+    <div class="stack-item">
+      <div class="stack-dot" style="background:#4ade80"></div>
+      <div><h4>Three specialised AI agents</h4><p>Market Intelligence · Lifestyle Matchmaking · Listing Generator — each autonomous, each composable</p></div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot" style="background:#60a5fa"></div>
+      <div><h4>Multimodal + multilingual</h4><p>English and Hindi voice input, image understanding via Vertex Vision, Gemma for local inference</p></div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot" style="background:#f59e0b"></div>
+      <div><h4>Full property lifecycle</h4><p>Discovery → shortlist → paperwork → closing. One unified platform, zero hand-offs to third parties</p></div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot" style="background:#f472b6"></div>
+      <div><h4>Antigravity-first design</h4><p>Floating UI components, depth layers, glassmorphic map overlays, ambient motion</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGES -->
+<section class="section" id="pages">
+  <div class="section-tag">Website architecture</div>
+  <h2>7 core pages to build</h2>
+  <p class="section-sub">Each page maps to a distinct phase of the user journey, from discovery through deal close.</p>
+
+  <div class="pages-grid">
+
+    <div class="page-card">
+      <div class="page-num">Page 01 · /</div>
+      <h3>Landing / Hero</h3>
+      <p>Animated city map hero with floating property cards. Value propositions. CTA to the Explorer. Live market pulse ticker. Trust signals (listings, cities, transactions).</p>
+      <div class="feature-tags">
+        <span class="ftag map">Interactive map</span>
+        <span class="ftag live">Live ticker</span>
+        <span class="ftag ai">AI chat widget</span>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-num">Page 02 · /explore</div>
+      <h3>City Explorer</h3>
+      <p>Full-screen map with layered heatmaps (price/footfall/transit). Property pins with instant AI summaries on hover. Voice search bar. Natural language filters ("3BHK under ₹80L near metro, walkable to cafés").</p>
+      <div class="feature-tags">
+        <span class="ftag map">Heatmap layers</span>
+        <span class="ftag ai">NL filters</span>
+        <span class="ftag ai">Voice search</span>
+        <span class="ftag data">Market data</span>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-num">Page 03 · /match</div>
+      <h3>Lifestyle Matchmaker</h3>
+      <p>Paired home + office search. Input: work address, lifestyle preferences, budget. Output: ranked pairs with real commute times (not crow-fly), walk-score, and AI narrative. Antigravity card flip animations.</p>
+      <div class="feature-tags">
+        <span class="ftag ai">Gemma embeddings</span>
+        <span class="ftag map">Commute API</span>
+        <span class="ftag data">Lifestyle scoring</span>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-num">Page 04 · /property/[id]</div>
+      <h3>Property Detail</h3>
+      <p>AI-narrated property walkthrough. Photo gallery with room labelling (Vertex Vision). Hyperlocal market comparison. Neighbourhood profile. One-click "Compare" and "Save". Chat thread anchored to this listing.</p>
+      <div class="feature-tags">
+        <span class="ftag ai">Vision AI</span>
+        <span class="ftag ai">AI narration</span>
+        <span class="ftag data">Price history</span>
+        <span class="ftag map">Neighbourhood</span>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-num">Page 05 · /list</div>
+      <h3>Listing Studio</h3>
+      <p>Upload photos + record voice note → AI generates full listing copy, highlights rooms, suggests price range, auto-tags amenities. Hindi and English support. Preview and publish in under 5 minutes.</p>
+      <div class="feature-tags">
+        <span class="ftag ai">Gemma STT</span>
+        <span class="ftag ai">Vision tagging</span>
+        <span class="ftag ai">Copy generation</span>
+        <span class="ftag live">Hindi + EN</span>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-num">Page 06 · /dashboard</div>
+      <h3>Market Intelligence</h3>
+      <p>City-level analytics: price velocity, supply/demand ratio, investment heatzones. Time-series charts. Neighbourhood report cards. Export-ready. Agent-driven natural language Q&amp;A over live data.</p>
+      <div class="feature-tags">
+        <span class="ftag data">Time series</span>
+        <span class="ftag ai">NL analytics</span>
+        <span class="ftag map">Zone maps</span>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-num">Page 07 · /deal</div>
+      <h3>Deal Assistant</h3>
+      <p>Document upload and AI review. Clause flagging, risk scoring, missing-field detection. Auto-fill standard forms. E-signature ready. Checklist of steps from offer to registration. Agentic follow-up reminders.</p>
+      <div class="feature-tags">
+        <span class="ftag ai">Document AI</span>
+        <span class="ftag live">Risk scoring</span>
+        <span class="ftag data">Compliance</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES TABLE -->
+<section class="section" id="features">
+  <div class="section-tag">Feature specification</div>
+  <h2>Prioritised feature list</h2>
+  <p class="section-sub">MoSCoW priority · agent owner · implementation notes for each feature.</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('all')">All features</button>
+    <button class="tab-btn" onclick="showTab('must')">Must-have</button>
+    <button class="tab-btn" onclick="showTab('ai')">AI-powered</button>
+  </div>
+
+  <table class="features-table" id="feat-table">
+    <thead>
+      <tr>
+        <th style="width:28%">Feature</th>
+        <th style="width:14%">Priority</th>
+        <th style="width:20%">Agent</th>
+        <th>Dev notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-type="must ai">
+        <td><strong>Natural language property search</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">Describe what you want in English or Hindi</span></td>
+        <td><span class="priority p-must">Must</span></td>
+        <td><span class="agent-badge">Matchmaking</span></td>
+        <td style="font-size:0.78rem">Gemma 2B for intent parsing → Vertex embeddings for semantic match. Cache top results per query cluster. Fallback: keyword filter.</td>
+      </tr>
+      <tr data-type="must map">
+        <td><strong>City heatmap (price + transit)</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">Multi-layer map overlays</span></td>
+        <td><span class="priority p-must">Must</span></td>
+        <td><span class="agent-badge">Market</span></td>
+        <td style="font-size:0.78rem">Google Maps Platform + deck.gl HexagonLayer. Tile pre-generation on Cloud Run nightly. Layer toggle in UI.</td>
+      </tr>
+      <tr data-type="must ai">
+        <td><strong>Voice listing creation (Hindi + EN)</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">Record → auto-generate full listing</span></td>
+        <td><span class="priority p-must">Must</span></td>
+        <td><span class="agent-badge">Listing</span></td>
+        <td style="font-size:0.78rem">Google Cloud Speech-to-Text (multilingual). Gemma generates structured copy from transcript. Vertex Vision tags uploaded photos. Single API roundtrip.</td>
+      </tr>
+      <tr data-type="must ai">
+        <td><strong>Lifestyle-aware paired matching</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">Home + office co-search with commute scores</span></td>
+        <td><span class="priority p-must">Must</span></td>
+        <td><span class="agent-badge">Matchmaking</span></td>
+        <td style="font-size:0.78rem">Google Routes API for real commute matrix. Vertex embeddings for lifestyle scoring. Output: ranked pairs with AI narrative card.</td>
+      </tr>
+      <tr data-type="must ai">
+        <td><strong>AI property narration</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">Auto-generate persuasive description from photos</span></td>
+        <td><span class="priority p-must">Must</span></td>
+        <td><span class="agent-badge">Listing</span></td>
+        <td style="font-size:0.78rem">Vertex Vision for room classification → Gemma for copy. Review + edit step before publish. Supports Hindi output.</td>
+      </tr>
+      <tr data-type="should ai">
+        <td><strong>Document risk scanner</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">Upload sale deed → flag clauses</span></td>
+        <td><span class="priority p-should">Should</span></td>
+        <td><span class="agent-badge">Document</span></td>
+        <td style="font-size:0.78rem">Document AI for OCR + entity extraction. Fine-tuned Gemma for legal risk classification. Colour-coded risk tiers. Not legal advice.</td>
+      </tr>
+      <tr data-type="should data">
+        <td><strong>Investment zone scoring</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">AI-ranked neighbourhoods for ROI potential</span></td>
+        <td><span class="priority p-should">Should</span></td>
+        <td><span class="agent-badge">Market</span></td>
+        <td style="font-size:0.78rem">Time-series price data + infrastructure project feeds. ARIMA or Prophet for forecasting. Display as rank + confidence interval.</td>
+      </tr>
+      <tr data-type="should ai">
+        <td><strong>Conversational chat per listing</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">"Is this good for a family?" style Q&amp;A</span></td>
+        <td><span class="priority p-should">Should</span></td>
+        <td><span class="agent-badge">Matchmaking</span></td>
+        <td style="font-size:0.78rem">Gemma with RAG over listing data + neighbourhood stats. Streaming response. Session memory scoped to listing page.</td>
+      </tr>
+      <tr data-type="could ai">
+        <td><strong>AR property overlay (mobile)</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">Point camera at building → see live price</span></td>
+        <td><span class="priority p-could">Could</span></td>
+        <td><span class="agent-badge">Market</span></td>
+        <td style="font-size:0.78rem">ARCore / WebXR + Google Places image match + Vertex Vision building recognition. High complexity, phased for v2.</td>
+      </tr>
+      <tr data-type="could data">
+        <td><strong>Proactive market alerts</strong><br/><span style="font-size:0.75rem;color:var(--ink3)">Push when saved area drops in price</span></td>
+        <td><span class="priority p-could">Could</span></td>
+        <td><span class="agent-badge">Market</span></td>
+        <td style="font-size:0.78rem">Cloud Scheduler + Pub/Sub pipeline. Gemma drafts personalised alert message. Firebase Cloud Messaging for mobile push.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- AGENTS -->
+<section class="section" id="agents">
+  <div class="section-tag">Agentic design</div>
+  <h2>How the agents work together</h2>
+  <p class="section-sub">Each agent is an autonomous Vertex AI pipeline. The master orchestrator routes user intent and chains agents when needed.</p>
+
+  <div style="margin-bottom:36px">
+    <p style="font-size:0.85rem;font-weight:600;margin-bottom:14px;color:var(--ink2)">Example: user says "find me a 2BHK near my office that's good for weekend cycling"</p>
+    <div class="workflow">
+      <div class="wf-step highlight">
+        <h5>User intent</h5>
+        <p>NL input parsed by Gemma into structured task</p>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step">
+        <h5>Orchestrator</h5>
+        <p>Plans: need commute + lifestyle + property search</p>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step">
+        <h5>Matchmaking agent</h5>
+        <p>Lifestyle vector: cycling + urban + commute ≤30min</p>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step">
+        <h5>Market agent</h5>
+        <p>Price range, availability, neighbourhood score</p>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-step">
+        <h5>Ranked results</h5>
+        <p>Cards with AI narrative + commute map</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mm-grid">
+    <div class="mm-card">
+      <div class="mm-icon">🏙️</div>
+      <h4>Market Intelligence Agent</h4>
+      <p>Continuous city-wide data aggregation. Produces price velocity maps, supply-demand indicators, and investment zone rankings. Answers NL queries like "is Dwarka Expressway overpriced right now?"</p>
+      <div class="mm-flow">
+        <span class="mm-node">Scraped listings</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Price index</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Gemma forecast</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Zone score</span>
+      </div>
+    </div>
+    <div class="mm-card">
+      <div class="mm-icon">🧭</div>
+      <h4>Lifestyle Matchmaking Agent</h4>
+      <p>Takes free-text lifestyle preferences, encodes them as embedding vectors via Vertex AI, and matches against property + neighbourhood embeddings. Unique feature: simultaneous home + office pair optimisation with real commute matrix.</p>
+      <div class="mm-flow">
+        <span class="mm-node">Lifestyle text</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Vertex embed</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Vector search</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Ranked pairs</span>
+      </div>
+    </div>
+    <div class="mm-card">
+      <div class="mm-icon">📸</div>
+      <h4>Listing Generation Agent</h4>
+      <p>Multimodal: takes photos (Vertex Vision classifies rooms, detects quality issues, tags amenities) and voice notes (Cloud STT, Hindi + EN). Gemma synthesises a polished listing in &lt;30 seconds. Owner reviews and publishes.</p>
+      <div class="mm-flow">
+        <span class="mm-node">Photos + voice</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Vision AI</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Gemma copy</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Preview</span>
+      </div>
+    </div>
+    <div class="mm-card">
+      <div class="mm-icon">📄</div>
+      <h4>Document Processing Agent</h4>
+      <p>Ingests PDFs (sale deeds, agreements, NOCs). Document AI extracts entities and clauses. Fine-tuned Gemma classifies risk level per clause. Outputs a colour-coded summary with actionable flags — no legal advice, just structured information.</p>
+      <div class="mm-flow">
+        <span class="mm-node">PDF upload</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Document AI</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Clause extract</span>
+        <span class="mm-arrow">→</span>
+        <span class="mm-node">Risk flag</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="section" id="tech">
+  <div class="section-tag">Technical stack</div>
+  <h2>What to build with</h2>
+  <p class="section-sub">Google-first stack, open-source where it matters.</p>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <span class="tech-tag" style="background:var(--accent2);color:var(--accent)">AI core</span>
+      <h4>Gemma 2B / 7B</h4>
+      <p>Local inference for chat, intent parsing, and listing copy. Deploy on Vertex AI Model Garden. Fine-tune on Indian real estate corpus for domain vocabulary.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-tag" style="background:var(--blue2);color:var(--blue)">Platform</span>
+      <h4>Vertex AI</h4>
+      <p>Embeddings (text-embedding-gecko), Vision API, Document AI, Model Registry, Pipelines for agent orchestration. Cloud Run for agent microservices.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-tag" style="background:var(--gold2);color:var(--gold)">Frontend</span>
+      <h4>Next.js 14 + TypeScript</h4>
+      <p>App Router. React Server Components for data-heavy pages. Framer Motion for antigravity UI. deck.gl for map layers. Tailwind CSS.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-tag" style="background:var(--coral2);color:var(--coral)">Maps</span>
+      <h4>Google Maps Platform</h4>
+      <p>Maps JavaScript API, Routes API for commute matrix, Places API for neighbourhood data, Geocoding. deck.gl HexagonLayer over Maps for heatmaps.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-tag" style="background:var(--accent2);color:var(--accent)">Data</span>
+      <h4>Firestore + AlloyDB</h4>
+      <p>Firestore for real-time listing updates and user sessions. AlloyDB for structured property analytics, time-series pricing, and ML-ready joins.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-tag" style="background:var(--blue2);color:var(--blue)">Search</span>
+      <h4>Vertex AI Matching Engine</h4>
+      <p>High-scale approximate nearest neighbour search for property + lifestyle embeddings. Sub-100ms latency at scale. Managed, no infra to run.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-tag" style="background:var(--gold2);color:var(--gold)">Voice</span>
+      <h4>Cloud Speech-to-Text v2</h4>
+      <p>Multilingual model with Hindi (hi-IN) and English (en-IN). Streaming recognition for voice search. Custom vocabulary for property terms (BHK, RERA, etc.).</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-tag" style="background:var(--coral2);color:var(--coral)">Infra</span>
+      <h4>Cloud Run + Pub/Sub</h4>
+      <p>Containerised agent microservices on Cloud Run (auto-scale to zero). Pub/Sub for async agent chaining. Cloud Scheduler for nightly market data refresh.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPRINTS -->
+<section class="section" id="sprints">
+  <div class="section-tag">Build plan</div>
+  <h2>8-week sprint roadmap</h2>
+  <p class="section-sub">Scoped for a Google hackathon or MVP. Each sprint ships something demonstrable.</p>
+
+  <div class="timeline">
+    <div class="sprint">
+      <div class="sprint-header">
+        <span class="sprint-num">Sprint 1–2 · Weeks 1–2</span>
+        <h4>Foundation + data pipeline</h4>
+      </div>
+      <div class="sprint-tasks">
+        <span class="task">Next.js project scaffold + Tailwind</span>
+        <span class="task">Firestore + AlloyDB setup</span>
+        <span class="task">Google Maps base integration</span>
+        <span class="task">Seed listing dataset (500+ properties)</span>
+        <span class="task">Vertex AI project + service accounts</span>
+        <span class="task">Gemma deployment on Vertex Model Garden</span>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="sprint-header">
+        <span class="sprint-num">Sprint 3–4 · Weeks 3–4</span>
+        <h4>City Explorer + Market Agent</h4>
+      </div>
+      <div class="sprint-tasks">
+        <span class="task">Deck.gl heatmap layers (price + transit)</span>
+        <span class="task">Property pins with hover cards</span>
+        <span class="task">Natural language search (Gemma intent parsing)</span>
+        <span class="task">Market Intelligence Agent API</span>
+        <span class="task">Price index time-series charts</span>
+        <span class="task">Voice search with Cloud STT</span>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="sprint-header">
+        <span class="sprint-num">Sprint 5 · Week 5</span>
+        <h4>Listing Studio + Multimodal</h4>
+      </div>
+      <div class="sprint-tasks">
+        <span class="task">Photo upload → Vertex Vision tagging</span>
+        <span class="task">Voice note recording (Hindi + EN)</span>
+        <span class="task">Gemma listing copy generation</span>
+        <span class="task">Preview + publish flow</span>
+        <span class="task">Listing agent microservice on Cloud Run</span>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="sprint-header">
+        <span class="sprint-num">Sprint 6 · Week 6</span>
+        <h4>Lifestyle Matchmaker</h4>
+      </div>
+      <div class="sprint-tasks">
+        <span class="task">Vertex embeddings for properties + lifestyle</span>
+        <span class="task">Matching Engine index build</span>
+        <span class="task">Routes API commute matrix</span>
+        <span class="task">Paired home + office ranking algorithm</span>
+        <span class="task">Antigravity card UI with flip animation</span>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="sprint-header">
+        <span class="sprint-num">Sprint 7 · Week 7</span>
+        <h4>Deal Assistant + orchestration</h4>
+      </div>
+      <div class="sprint-tasks">
+        <span class="task">Document AI PDF ingestion</span>
+        <span class="task">Gemma clause risk classifier (fine-tune)</span>
+        <span class="task">Master orchestrator agent (Vertex Pipelines)</span>
+        <span class="task">Agent chaining demo end-to-end</span>
+        <span class="task">Conversational chat per listing (RAG)</span>
+      </div>
+    </div>
+    <div class="sprint">
+      <div class="sprint-header">
+        <span class="sprint-num">Sprint 8 · Week 8</span>
+        <h4>Polish + demo prep</h4>
+      </div>
+      <div class="sprint-tasks">
+        <span class="task">Landing page hero animation</span>
+        <span class="task">Mobile responsive passes</span>
+        <span class="task">Gemma Hindi output fine-tuning</span>
+        <span class="task">Performance + caching (Cloud CDN)</span>
+        <span class="task">Demo script + recorded walkthrough</span>
+        <span class="task">Architecture diagram slide deck</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN NOTES -->
+<section class="section">
+  <div class="section-tag">Design language</div>
+  <h2>Antigravity UI principles</h2>
+  <p class="section-sub">The UI should feel like you're hovering above the city, looking down — light, spatial, floating.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:10px">Depth layers</div>
+      <p style="font-size:0.82rem;color:var(--ink2);line-height:1.65">Background: map at opacity 40%. Mid: blurred property cards. Foreground: chat panel. Three Z-planes give a sense of floating above the city grid.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:10px">Motion language</div>
+      <p style="font-size:0.82rem;color:var(--ink2);line-height:1.65">Cards rise on scroll (translateY -12px + opacity). Hover: 4px lift + soft shadow. Transitions: 280ms ease-out. Map layers fade in with 400ms stagger per tile.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:10px">Colour system</div>
+      <p style="font-size:0.82rem;color:var(--ink2);line-height:1.65">Earth + forest palette: deep green (#1a6b4a), warm sand (#f8f6f0), amber highlights for price signals, coral for risk flags. Never pure black or white.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:10px">Typography</div>
+      <p style="font-size:0.82rem;color:var(--ink2);line-height:1.65">DM Serif Display for headings (editorial weight). DM Sans for UI. Size scale: 48/32/20/16/13px. Tight tracking on display (-0.03em). Generous leading on body (1.75).</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:10px">Glassmorphism</div>
+      <p style="font-size:0.82rem;color:var(--ink2);line-height:1.65">Floating panels: backdrop-filter blur(16px), background rgba(255,255,255,0.72), 0.5px border rgba(255,255,255,0.4). Only for panels over the map — not for general UI.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:10px">Accessible AI</div>
+      <p style="font-size:0.82rem;color:var(--ink2);line-height:1.65">All AI-generated text has a "Generated by AI" chip. Loading states use skeleton shimmer, not spinners. Hindi UI labels use Noto Sans Devanagari fallback stack.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><strong>SmartSpace</strong> — Developer Blueprint · Built for Google Cloud · Vertex AI · Gemma · Agentic Workflows</div>
+  <div>Theme: Build with AI · 2025</div>
+</footer>
+
+<script>
+function showTab(type) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('#feat-table tbody tr').forEach(row => {
+    if (type === 'all') { row.style.display = ''; return; }
+    row.style.display = row.dataset.type && row.dataset.type.includes(type) ? '' : 'none';
+  });
+}
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

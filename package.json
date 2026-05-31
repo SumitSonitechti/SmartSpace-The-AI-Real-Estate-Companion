@@ -1,0 +1,30 @@
+{
+  "name": "smartspace-ai-real-estate",
+  "version": "1.0.0",
+  "description": "SmartSpace — India's first AI-powered real estate companion with 12 specialised agents",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=3000 --open=index.html",
+    "lint": "echo \"No build step required — single-file HTML app\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SumitSonitechti/SmartSpace-The-AI-Real-Estate-Companion.git"
+  },
+  "keywords": [
+    "real-estate",
+    "ai",
+    "india",
+    "proptech",
+    "hindi",
+    "voice-search",
+    "machine-learning",
+    "rera",
+    "property",
+    "smart-home"
+  ],
+  "author": "SmartSpace Technologies Pvt. Ltd.",
+  "license": "MIT",
+  "homepage": "https://sumitsonitechti.github.io/SmartSpace-The-AI-Real-Estate-Companion"
+}
